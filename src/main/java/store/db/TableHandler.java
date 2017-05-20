@@ -1,7 +1,6 @@
 package store.db;
 
 import org.apache.commons.lang3.StringUtils;
-import javafx.util.Pair;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,7 +88,7 @@ public class TableHandler {
 
     public List<HashMap<String, String>> getAll(List<String> selectionColumns,
                                                 HashMap<String, String> whitelistQuery,
-                                                List<Pair<String, String>> blacklistQuery) throws SQLException {
+                                                List<Map.Entry<String, String>> blacklistQuery) throws SQLException {
 
         if (whitelistQuery == null) {
             whitelistQuery = new HashMap<String, String>();
@@ -108,7 +107,7 @@ public class TableHandler {
                 whitelistValues.add(querySet.getKey() + "='" + querySet.getValue() + "'");
             }
 
-            for (Pair<String, String> querySet : blacklistQuery) {
+            for (Map.Entry<String, String> querySet : blacklistQuery) {
                 blacklistValues.add(querySet.getKey() + "!='" + querySet.getValue() + "'");
             }
             whitelistValues.addAll(blacklistValues);
