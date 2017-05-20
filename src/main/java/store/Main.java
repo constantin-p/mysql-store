@@ -1,8 +1,11 @@
 package store;
 
+import store.util.Config;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("MAIN");
+        Config.getInstance().loadConfig("store", "store.properties");
+        System.out.println(Config.getInstance().getConfig("store"));
     }
 }

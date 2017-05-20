@@ -2,10 +2,13 @@
 .idea/
 *.iml
 *.iws
- 
+
 # macOS
 .DS_Store
- 
+
 # Maven
 log/
 target/
+
+# Local configuration files
+*_secret.properties
