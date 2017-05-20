@@ -1,6 +1,6 @@
 package store.db;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import javafx.util.Pair;
 
 import java.sql.Connection;
