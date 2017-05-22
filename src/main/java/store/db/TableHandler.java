@@ -1,7 +1,7 @@
 package store.db;
 
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
