@@ -1,5 +1,6 @@
 package store.db;
 
+
 import java.util.HashMap;
 
 public interface Storable {

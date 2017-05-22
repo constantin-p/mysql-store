@@ -1,5 +1,7 @@
 package store.db;
 
+
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
@@ -179,6 +181,8 @@ public class TableHandler {
              *  [0]   for SQL statements that return nothing
              */
             return preparedStatement.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException throwable) {
+            return -1;
         } catch (SQLException throwable) {
             throw throwable;
         } finally {
