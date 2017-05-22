@@ -2,15 +2,14 @@ package store.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class Database {
 
     private static Database instance;
-
     private static Properties configuration;
     private static Connection connection = null;
-
     private static String url;
 
     private Database(Properties configuration) {
@@ -25,26 +24,20 @@ public class Database {
         instance = new Database(configuration);
     }
 
-    public static Database getInstance() {
+    public static TableHandler getTable(String tableName) throws Exception {
         if(instance == null){
             throw new NullPointerException("Database instance is not configured.\n" +
                     "Call Database.configInstance() first");
-        }
-        return instance;
-    }
+        } else {
+            try {
+                connection = DriverManager.getConnection(url,
+                        configuration.getProperty("DB_USER"),
+                        configuration.getProperty("DB_PASS"));
 
-
-    public static TableHandler getTable(String tableName) throws Exception {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url,
-                    configuration.getProperty("DB_USER"),
-                    configuration.getProperty("DB_PASS"));
-
-            return new TableHandler(tableName, connection);
-
-        } catch (Exception throwable) {
-            throw throwable;
+                return new TableHandler(tableName, connection);
+            } catch (SQLException throwable) {
+                throw throwable;
+            }
         }
     }
 
