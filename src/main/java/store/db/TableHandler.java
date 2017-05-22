@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TableHandler {
+    private static final Logger LOGGER = Logger.getLogger(TableHandler.class.getName());
 
     private String tableName;
     private Connection connection;
@@ -65,7 +68,7 @@ public class TableHandler {
 
         String statement = "SELECT " + StringUtils.join(selectionColumns, ",") +
                 " FROM " + tableName + suffix;
-        System.out.println(" get | " + statement);
+        LOGGER.log(Level.INFO," get | " + statement);
 
         try {
             preparedStatement = connection.prepareStatement(statement);
@@ -120,7 +123,7 @@ public class TableHandler {
         String statement = "SELECT " + StringUtils.join(selectionColumns, ",") +
                 " FROM " + tableName + suffix;
 
-        System.out.println(" getAll | " + statement);
+        LOGGER.log(Level.INFO," getAll | " + statement);
 
         try {
             preparedStatement = connection.prepareStatement(statement);
@@ -159,7 +162,7 @@ public class TableHandler {
         }
 
         String statement = "INSERT INTO " + tableName + "(" + keys + ") VALUES(" + placeholderValues + ")";
-        System.out.println(" insert | " + statement);
+        LOGGER.log(Level.INFO," insert | " + statement);
 
         try {
             preparedStatement = connection.prepareStatement(statement);
@@ -219,7 +222,7 @@ public class TableHandler {
 
         String statement = "UPDATE " + tableName +
                 " SET " + placeholderValues + suffix;
-        System.out.println(" update | " + statement);
+        LOGGER.log(Level.INFO," update | " + statement);
 
         try {
             preparedStatement = connection.prepareStatement(statement);
@@ -266,7 +269,7 @@ public class TableHandler {
         }
 
         String statement = "DELETE FROM " + tableName + suffix;
-        System.out.println(" delete | " + statement);
+        LOGGER.log(Level.INFO," delete | " + statement);
 
         try {
             preparedStatement = connection.prepareStatement(statement);
